@@ -93,6 +93,10 @@ function trim(str?: string) {
   return str?.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '') || '';
 }
 
+function padZero(num: number) {
+  return num < 10 ? `0${num}` : num;
+}
+
 function getTime() {
   const date = new Date();
   const year = date.getFullYear();
@@ -101,7 +105,7 @@ function getTime() {
   const hour = date.getHours();
   const minute = date.getMinutes();
   const second = date.getSeconds();
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  return `${year}-${padZero(month)}-${padZero(day)} ${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
 }
 
 function _decodeURI(uri: string) {
