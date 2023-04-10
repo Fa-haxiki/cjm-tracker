@@ -191,16 +191,14 @@ class CjmTracker {
    * 手动上报
    */
   track(params: {
-    event: EventEnum;
+    event?: EventEnum;
     [key: string]: any;
-  } = {
-    event: EventEnum.click_feature,
   }, callback?: Function) {
     // 获取基础信息
     const baseInfo = this.getBaseInfo();
     // 合并参数
     const trackData: Partial<TrackData> = {
-      ...params,
+      ...(!!params.event ? params : {...params, event: EventEnum.click_feature}),
       ...baseInfo,
     };
     // 校验必填参数

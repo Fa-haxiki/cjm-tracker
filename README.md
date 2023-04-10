@@ -25,7 +25,7 @@ $ npm run build
 1. 采用script标签引入的方式: 注意需要带上版本号
 
 ```html
-<script src="https://unpkg.com/cjm-tracker@0.0.2/dist/umd/cjm-tracker.min.js"></script>
+<script src="https://unpkg.com/cjm-tracker@{version}/dist/umd/cjm-tracker.min.js"></script>
 ```
 
 ```js
