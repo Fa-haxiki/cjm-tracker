@@ -56,10 +56,11 @@ window.cjmTracker.setConfig({
 ```js
 // 在需要上报的地方调用
 window.cjmTracker.track({
-  type: 'click_feature', // 上报类型， 默认为 click_feature，可不填
-  extra: {
-    featureId: 'xxx', // 功能id
-  },
+  event: EventEnum.click_feature, // 上报类型， 默认为 click_feature，可不填
+  funId: 'xxx', // 功能id
+  funName: 'xxx', // 功能名称
+}, () => {
+  // 上报成功后的回调，可不填，同步执行
 });
 ```
 
