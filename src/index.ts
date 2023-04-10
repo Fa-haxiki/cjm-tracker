@@ -18,7 +18,7 @@ type TrackData = {
   time: number;                   // 事件发生的时间
   appName: string;                // 应用名称
   appVersion: string;             // 应用版本
-  appId: string;                  // 应用id
+  appId?: string;                  // 应用id
   userAgent?: string;             // 用户浏览器信息
   referrer?: string;              // 上一个页面url
   url?: string;                   // 当前页面url
@@ -42,7 +42,6 @@ const REQUIRED_KEYS: (keyof TrackData)[] = [
   'time',
   'appName',
   'appVersion',
-  'appId',
 ];
 
 type LogEvent = {
@@ -188,9 +187,7 @@ class CjmTracker {
     }
     const image = new Image();
     image.crossOrigin = 'anonymous';
-    image.src = `${
-      this.options.reportUrl
-    }/cjm_tracker.gif?data=${encodeURIComponent(stringData)}`;
+    image.src = `${this.options.reportUrl}?data=${encodeURIComponent(stringData)}`;
   }
 
   /**
