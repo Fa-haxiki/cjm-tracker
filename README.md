@@ -50,7 +50,7 @@ window.cjmTracker = new CjmTracker({
 ```js
 // 在获取到用户信息后添加配置, 例如:
 const userInfo = await getUserInfo();
-window.cjmTracker.setConfig({
+window.cjmTracker.addConfig({
   userAccount: userInfo.account,
   userRole: userInfo.role,
   userArea: userInfo.area,

@@ -15,7 +15,7 @@ enum CjmUserSourceEnum {
 
 type TrackData = {
   event: CjmEventEnum;            // 事件：1：功能点击;2页面浏览；3视频播放
-  time: number;                   // 事件发生的时间
+  time: string;                   // 事件发生的时间
   appName: string;                // 应用名称
   appVersion: string;             // 应用版本
   appId?: string;                  // 应用id
@@ -91,6 +91,17 @@ function isString(arg: any) {
 
 function trim(str?: string) {
   return str?.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '') || '';
+}
+
+function getTime() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
 function _decodeURI(uri: string) {
@@ -170,7 +181,7 @@ class CjmTracker {
       referrer: document.referrer,
       title: document.title,
       url: getURL(),
-      time: new Date().getTime(),
+      time: getTime(),
     };
   }
 
