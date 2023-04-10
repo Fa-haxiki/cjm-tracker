@@ -28,11 +28,19 @@ $ npm run build
 <script src="https://unpkg.com/cjm-tracker@{version}/dist/umd/cjm-tracker.min.js"></script>
 ```
 
+2. 采用npm引入的方式
+    
+```bash
+$ npm install cjm-tracker
+```
+
 ```js
 // 在项目中引入
-import Tracker from 'cjm-tracker';
+import {CjmTracker, CjmEventEnum} from 'cjm-tracker';
 
-window.cjmTracker = new Tracker({
+```
+```js
+window.cjmTracker = new CjmTracker({
   reportUrl: 'http://localhost:3000/', // 上报地址
   debug: false, // 是否开启调试模式
 }, {
@@ -56,7 +64,7 @@ window.cjmTracker.setConfig({
 ```js
 // 在需要上报的地方调用
 window.cjmTracker.track({
-  event: EventEnum.click_feature, // 上报类型， 默认为 click_feature，可不填
+  event: CjmEventEnum.click_feature, // 上报类型， 默认为 click_feature，可不填
   funId: 'xxx', // 功能id
   funName: 'xxx', // 功能名称
 }, () => {

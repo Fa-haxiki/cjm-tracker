@@ -1,11 +1,11 @@
-enum EventEnum {
+enum CjmEventEnum {
   click_feature = '1',
   view_page = '2',
   play_video = '3',
 }
 
 type TrackData = {
-  event: EventEnum;          // required     事件：1：功能点击;2页面浏览；3视频播放
+  event: CjmEventEnum;          // required     事件：1：功能点击;2页面浏览；3视频播放
   time: number;           // required     事件发生的时间
   userAgent: string;      // required     用户浏览器信息
   referrer: string;       // non-required 上一个页面url
@@ -191,14 +191,14 @@ class CjmTracker {
    * 手动上报
    */
   track(params: {
-    event?: EventEnum;
+    event?: CjmEventEnum;
     [key: string]: any;
   }, callback?: Function) {
     // 获取基础信息
     const baseInfo = this.getBaseInfo();
     // 合并参数
     const trackData: Partial<TrackData> = {
-      ...(!!params.event ? params : {...params, event: EventEnum.click_feature}),
+      ...(!!params.event ? params : {...params, event: CjmEventEnum.click_feature}),
       ...baseInfo,
     };
     // 校验必填参数
@@ -244,4 +244,4 @@ class CjmTracker {
   }
 }
 
-export {CjmTracker, EventEnum};
+export {CjmTracker, CjmEventEnum};
