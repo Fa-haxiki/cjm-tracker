@@ -1,0 +1,31 @@
+{
+  "name": "cjm-tracker",
+  "version": "0.0.5",
+  "description": "cjm tracker",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "patch": "npm version patch -m \"build: release %s\" && npm publish",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "keywords": [
+    "cjm",
+    "tracker"
+  ],
+  "authors": [
+    "liulunsheng"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^4.1.8"
+  }
+}
