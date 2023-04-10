@@ -1,5 +1,5 @@
 type TrackData = {
-  type: string;           // required     事件名称: 'click_feature'
+  event: string;     // required     事件：1：功能点击;2页面浏览；3视频播放
   time: number;           // required     事件发生的时间
   userAgent: string;      // required     用户浏览器信息
   referrer: string;       // non-required 上一个页面url
@@ -9,10 +9,12 @@ type TrackData = {
   appVersion: string;     // required     应用版本
   appId: string;          // required     应用id
   userAccount?: string;   // non-required 用户账号(一般是手机号)
+  userName?: string;      // not-required 用户姓名
   userRole?: string;      // not-required 用户角色(如果账号存在，则角色也存在)
   userArea?: string;      // not-required 用户所在区域
-  userSource?: string;    // not-required 用户渠道来源
-  extra?: object;         // not-required 用户自定义额外信息
+  userSource?: string;    // not-required 用户渠道来源：0其他；1pc；2微信小程序；3浙里办；4app；5H5
+  funId?: string;         // not-required 功能id
+  funName?: string;       // not-required 功能名称
 };
 
 type Options = {
@@ -21,7 +23,7 @@ type Options = {
 };
 
 const REQUIRED_KEYS: (keyof TrackData)[] = [
-  'type',
+  'event',
   'time',
   'userAgent',
   'url',
@@ -124,7 +126,6 @@ class CjmTracker {
    * 1.构造函数没有传入默认配置，则需要在合适的时机调用该方法设置默认配置
    * 2.构造函数传入默认配置，但需要修改默认配置时，也可以调用该方法修改默认配置
    * 注意：该方法会覆盖默认配置中的所有属性
-   * @param {Object} config 配置
    */
   addConfig(config: Partial<TrackData>) {
     this.config = { ...this.config, ...config };
@@ -132,7 +133,6 @@ class CjmTracker {
 
   /**
    * 校验必填参数
-   * @param {Object} params 上报参数
    */
   checkRequiredParams(params: Partial<TrackData>) {
     let result = true;
@@ -165,7 +165,6 @@ class CjmTracker {
 
   /**
    * 上报
-   * @param {String} stringData
    */
   imagePost(stringData: string) {
     if (!this.options?.reportUrl) {
@@ -184,17 +183,14 @@ class CjmTracker {
 
   /**
    * 手动上报
-   * @param {Object} params 上报参数
-   * @param {String} type 上报类型: 默认为'click_feature'
-   * @param {Function} callback 上报成功后的回调
    */
-  track(params: object, type = 'click_feature', callback: Function) {
+  track(params: object, event = '1', callback: Function) {
     // 获取基础信息
     const baseInfo = this.getBaseInfo();
     // 合并参数
-    const trackData = {
-      type,
-      extra: params,
+    const trackData: Partial<TrackData> = {
+      event,
+      ...params,
       ...baseInfo,
     };
     // 校验必填参数
