@@ -1,8 +1,5 @@
 # 超级码埋点 cjm-tracker
 
-[![NPM version](https://img.shields.io/npm/v/cjm-tracker.svg?style=flat)](https://npmjs.org/package/cjm-tracker)
-[![NPM downloads](http://img.shields.io/npm/dm/cjm-tracker.svg?style=flat)](https://npmjs.org/package/cjm-tracker)
-
 ## Features
 
 - [x] 采用gif图片上报
