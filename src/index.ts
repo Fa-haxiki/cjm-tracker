@@ -1,26 +1,35 @@
 enum CjmEventEnum {
-  click_feature = '1',
-  view_page = '2',
-  play_video = '3',
+  click_feature = 1,
+  view_page = 2,
+  play_video = 3,
+}
+
+enum CjmUserSourceEnum {
+  other = 0,
+  pc = 1,
+  wechat = 2,
+  zlb = 3,
+  app = 4,
+  h5 = 5,
 }
 
 type TrackData = {
-  event: CjmEventEnum;          // required     事件：1：功能点击;2页面浏览；3视频播放
-  time: number;           // required     事件发生的时间
-  userAgent: string;      // required     用户浏览器信息
-  referrer: string;       // non-required 上一个页面url
-  url: string;            // required     当前页面url
-  title: string;          // required     当前页面title
-  appName: string;        // required     应用名称
-  appVersion: string;     // required     应用版本
-  appId: string;          // required     应用id
-  userAccount?: string;   // non-required 用户账号(一般是手机号)
-  userName?: string;      // not-required 用户姓名
-  userRole?: string;      // not-required 用户角色(如果账号存在，则角色也存在)
-  userArea?: string;      // not-required 用户所在区域
-  userSource?: string;    // not-required 用户渠道来源：0其他；1pc；2微信小程序；3浙里办；4app；5H5
-  funId?: string;         // not-required 功能id
-  funName?: string;       // not-required 功能名称
+  event: CjmEventEnum;            // 事件：1：功能点击;2页面浏览；3视频播放
+  time: number;                   // 事件发生的时间
+  appName: string;                // 应用名称
+  appVersion: string;             // 应用版本
+  appId: string;                  // 应用id
+  userAgent?: string;             // 用户浏览器信息
+  referrer?: string;              // 上一个页面url
+  url?: string;                   // 当前页面url
+  title?: string;                 // 当前页面title
+  userAccount?: string;           // 用户账号(一般是手机号)
+  userName?: string;              // 用户姓名
+  userRole?: string;              // 用户角色(如果账号存在，则角色也存在)
+  userArea?: string;              // 用户所在区域
+  userSource?: CjmUserSourceEnum; // 用户渠道来源：0其他；1pc；2微信小程序；3浙里办；4app；5H5
+  funId?: string;                 // 功能id
+  funName?: string;               // 功能名称
 };
 
 type Options = {
@@ -31,9 +40,6 @@ type Options = {
 const REQUIRED_KEYS: (keyof TrackData)[] = [
   'event',
   'time',
-  'userAgent',
-  'url',
-  'title',
   'appName',
   'appVersion',
   'appId',
@@ -244,4 +250,4 @@ class CjmTracker {
   }
 }
 
-export {CjmTracker, CjmEventEnum};
+export {CjmTracker, CjmEventEnum, CjmUserSourceEnum};
