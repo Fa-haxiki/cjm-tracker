@@ -80,16 +80,6 @@ enum CjmEventEnum {
   view_page = 2,     // 查看页面
   play_video = 3,    // 播放视频
 }
-
-// 用户来源
-enum CjmUserSourceEnum {
-  other = 0,  // 其他
-  pc = 1,     // pc
-  wechat = 2, // 微信
-  zlb = 3,    // 浙里办
-  app = 4,    // app
-  h5 = 5,     // h5
-}
 ```
 
 ## LICENSE
