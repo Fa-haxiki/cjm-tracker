@@ -2,10 +2,10 @@
 
 ## Features
 
-- [x] 采用gif图片上报
-- [x] 支持自定义上报类型
-- [x] 支持自定义上报参数
-- [x] 支持自定义上报地址
+- 采用gif图片上报
+- 支持自定义上报类型
+- 支持自定义上报参数
+- 支持自定义上报地址
 
 ## Install
 
@@ -30,36 +30,38 @@ $ npm run build
 ```bash
 $ npm install cjm-tracker
 ```
+在项目中引入
 
 ```js
-// 在项目中引入
-import {CjmTracker, CjmEventEnum, CjmUserSourceEnum} from 'cjm-tracker';
-
+import {CjmTracker, CjmEventEnum} from 'cjm-tracker';
 ```
+初始化参数需要根据实际业务来决定，以下为示例
+
 ```js
 window.cjmTracker = new CjmTracker({
-  reportUrl: 'http://localhost:3000/', // 上报地址
+  reportUrl: '/api/xxxxx', // 上报地址
   debug: false, // 是否开启调试模式
 }, {
   appName: 'xxx',
   appVersion: 'x.x.x',
-  appId: 'xxx',
+  ... // 其他自定义参数
 });
 ```
 
+如果需要把一些公共参数添加到config中，可调用addConfig方法
+例如在获取到用户信息后添加
+
 ```js
-// 在获取到用户信息后添加配置, 例如:
 const userInfo = await getUserInfo();
 window.cjmTracker.addConfig({
   userAccount: userInfo.account,
   userRole: userInfo.role,
   userArea: userInfo.area,
-  userSource: CjmUserSourceEnum.pc,
 });
 ```
+在需要上报的地方调用
 
 ```js
-// 在需要上报的地方调用
 window.cjmTracker.track({
   event: CjmEventEnum.click_feature, // 上报类型， 默认为 click_feature，可不填
   funId: 'xxx', // 功能id
