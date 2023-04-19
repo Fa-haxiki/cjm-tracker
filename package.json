@@ -8,7 +8,10 @@
     "dev": "father dev",
     "build": "father build",
     "patch": "npm version patch -m \"build: release %s\" && npm publish",
-    "prepublishOnly": "father doctor && npm run build"
+    "minor": "npm version minor -m \"build: release %s\" && npm publish",
+    "major": "npm version major -m \"build: release %s\" && npm publish",
+    "prepublishOnly": "father doctor && npm run build",
+    "startDistServer": "cd dist && http-server -p 8000"
   },
   "keywords": [
     "cjm",
@@ -26,6 +29,11 @@
     "access": "public"
   },
   "devDependencies": {
-    "father": "^4.1.8"
+    "@types/uuid": "^9.0.1",
+    "father": "^4.1.8",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cjm Tracker Example</title>
+</head>
+<body>
+<div>
+    <button id="test" class="my-button" onclick="onTestClick()">
+        test
+    </button>
+
+    <p>只因你太美</p>
+</div>
+<script src="http://localhost:8000/umd/cjm-tracker.min.js"></script>
+<script>
+    window.cjmTracker = new CjmTracker({
+      reportUrl: 'http://localhost:3000/report',
+      debug: true,
+      enableWebClickEvent: true,
+    }, {
+      project: 'test_html',
+    });
+</script>
+<script>
+    function onTestClick() {
+      console.log('test');
+      // window.cjmTracker.track('test', {a: 1, b: 2});
+    }
+</script>
+</body>
+</html>

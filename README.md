@@ -3,9 +3,9 @@
 ## Features
 
 - 采用gif图片上报
-- 支持自定义上报类型
-- 支持自定义上报参数
-- 支持自定义上报地址
+- 支持自定义上报类型，自定义上报参数，自定义上报地址
+- PV采集
+- 元素点击采集
 
 ## Install
 
@@ -19,7 +19,7 @@ $ npm run build
 
 ## Usage
 
-1. 采用script标签引入的方式: 注意需要带上版本号
+1. 采用script标签引入的方式: 注意需要带上版本号，不带版本默认最新
 
 ```html
 <script src="https://unpkg.com/cjm-tracker@{version}/dist/umd/cjm-tracker.min.js"></script>
@@ -33,7 +33,7 @@ $ npm install cjm-tracker
 在项目中引入
 
 ```js
-import {CjmTracker, CjmEventEnum} from 'cjm-tracker';
+import {CjmTracker} from 'cjm-tracker';
 ```
 初始化参数需要根据实际业务来决定，以下为示例
 
@@ -41,47 +41,42 @@ import {CjmTracker, CjmEventEnum} from 'cjm-tracker';
 window.cjmTracker = new CjmTracker({
   reportUrl: '/api/xxxxx', // 上报地址
   debug: false, // 是否开启调试模式
+  enablePVEvent: true, // 是否开启PV采集
+  enableWebClickEvent: true, // 是否开启元素点击采集
 }, {
-  appName: 'xxx',
-  appVersion: 'x.x.x',
-  ... // 其他自定义参数
+  project: 'xxx', // 项目唯一标识
 });
 ```
 
-如果需要把一些公共参数添加到config中，可调用addConfig方法
-例如在获取到用户信息后添加
+自定义上报，例如：采集功能点击事件
 
 ```js
-const userInfo = await getUserInfo();
-window.cjmTracker.addConfig({
-  userAccount: userInfo.account,
-  userRole: userInfo.role,
-  userArea: userInfo.area,
-});
-```
-在需要上报的地方调用
-
-```js
-window.cjmTracker.track({
-  event: CjmEventEnum.click_feature, // 上报类型， 默认为 click_feature，可不填
-  funId: 'xxx', // 功能id
-  funName: 'xxx', // 功能名称
-}, () => {
-  // 上报成功后的回调，可不填，同步执行
-});
+window.cjmTracker.track(
+  'feature_click', // 自定义上报事件英文名
+  {
+    funId: 'xxx', // 功能id
+    funName: 'xxx', // 功能名称
+  }, 
+  () => {
+    // 上报成功后的回调，可不填，同步执行
+  }
+);
 ```
 
-## Enum
+## API
 
-```ts
-// 上报类型
-enum CjmEventEnum {
-  click_feature = 1, // 点击功能
-  view_page = 2,     // 查看页面
-  play_video = 3,    // 播放视频
-}
-```
+### new CjmTracker(options, defaultConfigs)
 
-## LICENSE
+- options {Object} 配置项
+  - reportUrl {String} 上报地址, 必填
+  - debug {Boolean} 是否开启调试模式, 默认false
+  - enablePVEvent {Boolean} 是否开启PV采集, 默认false
+  - enableWebClickEvent {Boolean} 是否开启元素点击采集, 默认false
+- defaultConfigs {Object} 默认上报参数
+  - project {String} 项目唯一标识，必填
 
-MIT
+### tracker.track(eventName, properties?, callback?)
+
+- eventName {String} 自定义上报事件英文名, 必填
+- properties {Object} 自定义上报参数, 可选
+- callback {Function} 上报成功后的回调，可不填，同步执行
