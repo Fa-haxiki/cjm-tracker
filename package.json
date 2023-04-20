@@ -13,6 +13,10 @@
     "prepublishOnly": "father doctor && npm run build",
     "startDistServer": "cd dist && http-server -p 8000"
   },
+  "homepage": "http://git.kf315.net/super_code3.0/cjmnpm/cjm-tracker",
+  "bugs": {
+    "url": "http://git.kf315.net/super_code3.0/cjmnpm/cjm-tracker/issues"
+  },
   "keywords": [
     "cjm",
     "tracker"
