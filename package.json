@@ -1,6 +1,6 @@
 {
   "name": "cjm-tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "cjm tracker",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
