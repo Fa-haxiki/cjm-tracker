@@ -21,9 +21,7 @@
     "cjm",
     "tracker"
   ],
-  "authors": [
-    "liulunsheng"
-  ],
+  "author": "liulunsheng",
   "license": "MIT",
   "files": [
     "dist",
