@@ -1,5 +1,7 @@
 # 超级码埋点 cjm-tracker
 
+> My NodeJs Version: v14.20.0
+
 ## Features
 
 - 采用gif图片上报
