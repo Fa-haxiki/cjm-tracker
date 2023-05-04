@@ -60,6 +60,10 @@ class CjmTracker {
       level: 'info',
       message: `CjmTracker ${SDK_TYPE}_${SDK_VERSION} 实例化成功`,
     });
+    this.initEvent();
+  }
+
+  initEvent() {
     if (!!this.options.enablePVEvent) {
       this.track('pageview');
       addPageViewListener((lastUrl: string) => {
